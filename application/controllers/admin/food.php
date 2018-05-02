@@ -78,12 +78,13 @@ class food extends CI_Controller {
     }
 
     public function deleteDish(){
+        $id = $this->uri->segment(4);
         $this->load->helper('form');
         $this->load->model('Dishes_model');
+        $data['dishes'] = $this->Dishes_model->deleteDishes($id);
         $data['dishes'] = $this->Dishes_model->getDishes();
         $data['title'] = 'List of Dishes';
         $data['activeLink'] = 'users';
-        $data['flashPartialView'] = $this->load->view('templates/flash', $data, TRUE);
         $this->load->view('templates/header', $data);
         $this->load->view('menu/admin_dasboard', $data);
         $this->load->view('admin/food/listDish', $data);
